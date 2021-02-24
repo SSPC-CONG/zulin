@@ -1,0 +1,42 @@
+header{
+  height: 36px;
+  background: #F5F5F5;
+  border-bottom: 1px solid #EEE;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: right;
+}
+.welcome{
+  width: 15%;
+  text-align: right;
+  font-size: 12px;
+  color: #F22E00!important;
+  padding:  0 10% 0 0;
+}
+.head_photo img,.head_photo{
+  height: 30px;
+  width: 30px;
+}
+.head_photo img{
+  border-radius: 50%;
+}
+.home_logo{
+  flex: 1;
+  margin: 0 0 0 10%;
+}
+.guild{
+  display: flex;
+  height: 80px;
+  align-items: center;
+}
+.menu{
+  flex: 1;
+  text-align: center;
+  height: 100%;
+  line-height: 80px;
+}
+.on{
+  border: 1px solid #e6e6e6;
+  border-top: #FFF;
+}
