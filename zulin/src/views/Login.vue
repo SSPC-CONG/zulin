@@ -33,9 +33,36 @@ export default {
   methods:{
     //登陆
     loginIn:function(){
-      console.log(this.username)
-      console.log(this.password)
-      this.$router.push('/home')
+      // console.log(this.username)
+      // console.log(this.password)
+      if(this.username.length==0||this.password.length==0){
+        alert('账号和密码不能为空');
+        return;
+      }
+      let params = {
+        username:this.username,
+        password:this.password
+      }
+      this.$http({
+        method:'post',
+        url:'/user/loginUser',
+        headers:{
+          "Content-Type": "application/json",
+          
+        },
+        data:params
+      }).then((response)=>{
+        //console.log(response)
+        if(response.data.code!=200){
+          alert('账号或密码错误');
+        }else{
+          console.log(response)
+          window.sessionStorage.setItem('token',response.data.data.token)
+          window.sessionStorage.setItem('user',JSON.stringify(response.data.data.user) )
+          this.$router.push('/home')
+        }
+      })
+      
     },
     //跳转注册页面
     toRegiester:function(){

@@ -5,9 +5,9 @@
     <header>
       <div class="welcome">hi!{{ user.nickname }}</div>
       <div class="head_photo">
-        <img :src="user.head_photo" alt="" />
+        <img :src="user.headPhoto" alt="" />
       </div>
-      <div class="home_logo">dnf娱乐用</div>
+      <div class="home_logo">您好！欢迎来到张小龙市场    |  热线电话：17333727821</div>
     </header>
     <section>
       <ul class="layui-nav" lay-filter="">
@@ -26,10 +26,16 @@ export default {
     return {
       user: {
         nickname: "大聪明",
-        head_photo: require("./../assets/img/login_bg.jpg"),
+        headPhoto: require("./../assets/img/login_bg.jpg"),
         vendor: true,
       },
+      token:'',
     };
   },
+  created(){
+    //获取token 和 user
+    this.token = window.sessionStorage.getItem('token');
+    this.user =JSON.parse(window.sessionStorage.getItem('user'))
+  }
 };
 </script>

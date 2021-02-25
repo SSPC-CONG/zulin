@@ -49,7 +49,6 @@
         </div>
         <el-button type="success" @click="register">注册</el-button>
       </div>
-       
     </div>
   </div>
 </template>
@@ -68,7 +67,7 @@ export default {
       sex: "男",
       nickname: "",
       head_photo: "",
-      vendor:"false",
+      vendor: "false",
       imageUrl: "",
     };
   },
@@ -79,7 +78,6 @@ export default {
       this.head_photo = this.imageUrl;
     },
     beforeAvatarUpload(file) {
-
       const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -92,9 +90,35 @@ export default {
       return isJPG && isLt2M;
     },
     //注册
-    register:function(){
-      this.$router.push('/')
-    }
+    register: function () {
+      if (this.password != this.rePassword) {
+        alert("两次密码不一致");
+        return;
+      }
+      
+      let userInfo = {
+        username: this.username,
+        password: this.password,
+        tel: this.tel,
+        sex: this.sex,
+        nickname: this.nickname,
+        head_photo: this.head_photo,
+        vendor: this.vendor=='false'?false:true,
+      };
+      this.$http({
+        method:'post',
+        url:'/user/addUser',
+        data:userInfo
+      }).then((response)=>{
+        if(response.data.code!=200){
+          alert('服务器错误');
+        }else{
+          alert('注册成功')
+          this.$router.push("/");
+        }
+      })
+      
+    },
   },
 };
 </script>
