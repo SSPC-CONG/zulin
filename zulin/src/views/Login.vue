@@ -59,7 +59,7 @@ export default {
           console.log(response)
           window.sessionStorage.setItem('token',response.data.data.token)
           window.sessionStorage.setItem('user',JSON.stringify(response.data.data.user) )
-          this.$router.push('/home')
+          this.$router.push('/home/auction')
         }
       })
       

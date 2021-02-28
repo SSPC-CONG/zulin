@@ -3,6 +3,13 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Auction from '../views/Auction.vue'
+import Lease from '../views/Lease.vue'
+import Mine from '../views/Mine.vue'
+import Put from '../views/Put.vue'
+import PutLease from '../views/PutLease.vue'
+import AuctionInfo from '../views/AuctionInfo.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,6 +27,33 @@ const routes = [
     path:'/home',
     name:'home',
     component:Home,
+    children:[
+      {
+        path:'auction',
+        component:Auction
+      },
+      {
+        path:'lease',
+        component:Lease
+      },
+      {
+        path:'mine',
+        component:Mine
+      },
+      {
+        path:'put',
+        component:Put
+      },
+      {
+        path:'putLease',
+        component:PutLease
+      }
+     
+    ]
+  },
+  {
+    path:'/auctionInfo',
+    component:AuctionInfo
   }
   // {
   //   path: '/about',
@@ -34,5 +68,10 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+const VueRouterPush =VueRouter.prototype.push
+VueRouter.prototype.push = function push (to) {
+  return VueRouterPush.call(this, to).catch(err => err)
+}
 
 export default router

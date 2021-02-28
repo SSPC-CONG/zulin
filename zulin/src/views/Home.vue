@@ -3,20 +3,21 @@
 <template>
   <div class="home">
     <header>
-      <div class="welcome">hi!{{ user.nickname }}</div>
+      <div class="welcome">hi! {{ user.nickname }}</div>
       <div class="head_photo">
         <img :src="user.headPhoto" alt="" />
       </div>
-      <div class="home_logo">您好！欢迎来到张小龙市场    |  热线电话：17333727821</div>
+      <div class="home_logo">您好！欢迎来到张小龙市场 | 热线电话：17333727821</div>
     </header>
-    <section>
-      <ul class="layui-nav" lay-filter="">
-        <li class="layui-nav-item"><a href="">拍卖区</a></li>
-        <li class="layui-nav-item layui-this"><a href="">租凭区</a></li>
-        <li class="layui-nav-item"><a href="">我的订单</a></li>
-        <li class="layui-nav-item" v-if="user.vendor"><a href="">我要上架</a></li>
-      </ul>
-    </section>
+    <nav class="guild">
+      <div class="menu" :class="{on:on=='auction'}" id='auction' @click="handleChangePath('auction')">拍卖中心</div>
+      <div class="menu" :class="{on:on=='lease'}" id='lease' @click="handleChangePath('lease')">租凭中心</div>
+      <div class="menu" :class="{on:on=='mine'}" id='mine' @click="handleChangePath('mine')">关于我的</div>
+      <div class="menu" :class="{on:on=='put'}" v-if="user.vendor" id='put' @click="handleChangePath('put')">上架拍卖</div>
+      <div class="menu" :class="{on:on=='putLease'}" v-if="user.vendor" id='putLease' @click="handleChangePath('putLease')">上架出租</div>
+    </nav>
+    <section class="concent"><router-view ></router-view> </section>
+    
   </div>
 </template>
 <script>
@@ -30,12 +31,25 @@ export default {
         vendor: true,
       },
       token:'',
+      on:"auction",
     };
   },
   created(){
+    
+    if(window.sessionStorage.getItem('path')){
+      this.on = window.sessionStorage.getItem('path');
+    }
     //获取token 和 user
     this.token = window.sessionStorage.getItem('token');
-    this.user =JSON.parse(window.sessionStorage.getItem('user'))
-  }
+    this.user =JSON.parse(window.sessionStorage.getItem('user'));
+  },
+  methods:{
+    //改变路由
+    handleChangePath:function(path){
+      this.$router.push('/home/'+path);
+      this.on = path;
+      window.sessionStorage.setItem('path',path);
+    }
+  },
 };
 </script>

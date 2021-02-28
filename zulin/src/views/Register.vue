@@ -43,10 +43,10 @@
           </el-upload>
           <div>点击上传头像</div>
         </div>
-        <div class="u_name">
+        <!-- <div class="u_name">
           <el-radio v-model="vendor" label="true">卖家</el-radio>
           <el-radio v-model="vendor" label="false">买家</el-radio>
-        </div>
+        </div> -->
         <el-button type="success" @click="register">注册</el-button>
       </div>
     </div>
@@ -75,7 +75,7 @@ export default {
     handleAvatarSuccess(res, file) {
       //console.log(URL.createObjectURL(file.raw))
       this.imageUrl = URL.createObjectURL(file.raw);
-      this.head_photo = this.imageUrl;
+      this.head_photo = res.data;
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -102,7 +102,7 @@ export default {
         tel: this.tel,
         sex: this.sex,
         nickname: this.nickname,
-        head_photo: this.head_photo,
+        headPhoto: this.head_photo,
         vendor: this.vendor=='false'?false:true,
       };
       this.$http({
