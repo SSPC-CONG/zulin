@@ -15,6 +15,7 @@
         <el-button type="success" @click="loginIn">登陆</el-button>
         <div class="register pa">
             <a class="" @click="toRegiester">账号注册</a>
+            <a style="margin-left:20px;" @click="open">管理员登录</a>
         </div>
       </div>
     </div>
@@ -67,6 +68,25 @@ export default {
     //跳转注册页面
     toRegiester:function(){
       this.$router.push('/register')
+    },
+    open() {
+      var that = this;
+      this.$prompt('请输入管理员身份账号', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputErrorMessage: '秘钥不正确'
+      }).then(({ value }) => {
+        if(value == "root123"){
+          this.$message({
+            type: 'success',
+            message: '欢迎回来,管理员 '
+          });
+          that.$router.push("manager");
+        }else{
+          this.$message.error('错了哦，再想想');
+        }
+      }).catch(() => {
+      });
     }
   },
 }
