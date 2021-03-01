@@ -1,10 +1,12 @@
 <template>
   <div>
-    <div @click="becomeSeller" class="beSeller" v-if="Global.user.vendor">
+    <div @click="becomeSeller" class="beSeller" v-if="!Global.user.vendor">
+      操作:
       <el-radio v-model="radio" label="1" disabled>成为买家</el-radio>
       <el-radio v-model="radio" label="2">成为卖家</el-radio>
     </div>
     <div class="order">
+      我的订单：
       <el-table
         ref="multipleTable"
         :data="order"

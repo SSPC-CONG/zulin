@@ -1,0 +1,14 @@
+.search{
+  display: flex;
+  align-items: center;
+  height: 80px;
+  width: 70%;
+  margin: 0 auto;
+}
+.search .el-input{
+  width: 180px;
+  margin: 0px 20px 0 0;
+}
+.search .el-switch{
+  margin:  0 40px 0 0;
+}
