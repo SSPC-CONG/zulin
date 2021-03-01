@@ -54,8 +54,10 @@ header{
 }
 .img_arr{
   top: 71px;
-  width: 100%;
+  width: 60%;
   height:300px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 .el-image{
   height: 300px;

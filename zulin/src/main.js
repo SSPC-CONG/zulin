@@ -4,9 +4,10 @@ import router from './router'
 import global from './assets/css/global.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import aws from 'aws-sdk'
 
 import axios from 'axios';
-
+Vue.prototype.$aws = aws;
 Vue.prototype.$http = axios;
 axios.defaults.baseURL = "http://47.98.46.41:9696";
 
