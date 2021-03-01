@@ -2,7 +2,7 @@
   <div>
     <div class="search">
       <el-switch
-        v-model="isStart"
+        v-model="isStarting"
         active-text='未开始'
         inactive-text="已开始"
         @change="handleSwitchChange"
@@ -53,16 +53,12 @@ export default {
     },
     //switch改变
     handleSwitchChange:function(){
-      if(this.isStart){
-        this.isStarting = true;
-        this.isNoStart = true;
-      }
+      this.handleGetAuctionInfo()
     },
     //获取拍卖信息方法
     handleGetAuctionInfo: function () {
       let params = {
-        isNoStart: this.isNoStart,
-        isStarting: this.isNoStart,
+        isStarting: this.isStarting,
         page: this.page,
         pageSize: this.pageSize,
       };
