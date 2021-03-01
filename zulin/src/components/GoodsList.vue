@@ -21,7 +21,9 @@ export default {
   methods:{
     toAuctionInfo:function (id) {
       console.log(1)
-      this.$router.push({path:'/auctionInfo',query:{id:id,auctionInfo:this.list.result[id]}})
+      this.$router.push({path:'/auctionInfo',query:{id:id,auctionInfo:this.list.result.filter(function(item){
+        return item.id == id;
+      })[0] }})
     }
   }
 };

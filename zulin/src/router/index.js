@@ -9,6 +9,7 @@ import Mine from '../views/Mine.vue'
 import Put from '../views/Put.vue'
 import PutLease from '../views/PutLease.vue'
 import AuctionInfo from '../views/AuctionInfo.vue'
+import Manager from '../views/Manager.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/',
     name: 'login',
     component: Login
+  },
+  {
+    path:'/manager',
+    name:'manager',
+    component:Manager
   },
   {
     path:'/register',
