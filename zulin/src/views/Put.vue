@@ -10,6 +10,7 @@
               v-model="form.startTime"
               type="date"
               placeholder="选择日期"
+              value-format="yyyy-MM-dd HH:mm:ss"
             >
             </el-date-picker>
           </div>
@@ -20,6 +21,7 @@
               v-model="form.endTime"
               type="date"
               placeholder="选择日期"
+              value-format="yyyy-MM-dd HH:mm:ss"
             >
             </el-date-picker>
           </div>
@@ -43,7 +45,7 @@
             class="avatar-uploader"
             action="http://47.98.46.41:9696/file/uploadImg"
             :data="{ space: 'auction' }"
-            :headers="{token:token}"
+            :headers="{ token: token }"
             :show-file-list="false"
             :on-success="handleAvatarSuccess2"
             :before-upload="beforeAvatarUpload"
@@ -55,7 +57,7 @@
             class="avatar-uploader"
             action="http://47.98.46.41:9696/file/uploadImg"
             :data="{ space: 'auction' }"
-            :headers="{token:token}"
+            :headers="{ token: token }"
             :show-file-list="false"
             :on-success="handleAvatarSuccess3"
             :before-upload="beforeAvatarUpload"
@@ -67,7 +69,7 @@
             class="avatar-uploader"
             action="http://47.98.46.41:9696/file/uploadImg"
             :data="{ space: 'auction' }"
-            :headers="{token:token}"
+            :headers="{ token: token }"
             :show-file-list="false"
             :on-success="handleAvatarSuccess4"
             :before-upload="beforeAvatarUpload"
@@ -143,14 +145,31 @@ export default {
           productName: "",
         },
       },
-      token: Global.token,
+      initForm:{},
+      token:window.sessionStorage.getItem('token'),
       imgUrl: "",
       imgUrl2: "",
       imgUrl3: "",
       imgUrl4: "",
     };
   },
+  created(){
+    this.initForm = this.form;
+  },
+  watch:{
+    form:{
+      handler(newDate,oldDate){
+        console.log(newDate);
+      },
+      deep:true
+      
+    }
+  },
   methods: {
+    //打印日期
+    watchForm(){
+      console.log(this.form.startTime)
+    },
     //提交上架表单
     onSubmit() {
       //console.log(this.form);
@@ -158,14 +177,22 @@ export default {
         method: "post",
         url: "/auction/putAwayProductToAuction",
         headers: {
-          token: Global.token,
+          token: this.token,
         },
         data: this.form,
       }).then((response) => {
         if (response.data.code == 200) {
-          alert("上架成功");
-        
-          history.go(0)
+          this.$message({
+            message:'上架成功',
+            type:'success',
+          })
+          this.form = this.initForm;
+          console.log(this.form)
+        }else{
+          this.$message({
+            message:'上架失败',
+            type:'error',
+          })
         }
       });
     },

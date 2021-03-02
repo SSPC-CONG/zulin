@@ -3,8 +3,8 @@
     <div class="search">
       <el-switch
         v-model="isStarting"
-        active-text='未开始'
-        inactive-text="已开始"
+        active-text='已开始'
+        inactive-text="未开始"
         @change="handleSwitchChange"
       >
       </el-switch>
@@ -32,7 +32,8 @@ export default {
     return {
       isStart:false,
       isNoStart: false,
-      isStarting: false,
+      isStarting: true,
+      token:window.sessionStorage.getItem('token'),
       page: 1,
       pageSize: 10,
       list: {},
@@ -66,12 +67,18 @@ export default {
         method: "post",
         url: "/auction/getAuctionListAll",
         headers: {
-          token: Global.token,
+          token: this.token,
         },
         data: params,
       }).then((response) => {
         this.list = response.data.data;
         this.auctionInfo = response.data.data;
+        if(this.auctionInfo.result.length<=0){
+          this.$message({
+          message: '当前没有拍卖的产品',
+          type: 'warning'
+        });
+        }
         console.log(response);
       });
     },

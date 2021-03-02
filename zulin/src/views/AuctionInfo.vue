@@ -8,7 +8,7 @@
         <img :src="user.headPhoto" alt="" />
       </div>
       <div class="home_logo">
-        您好！欢迎来到张小龙市场 | 热线电话：17333727821
+        您好！欢迎来到小龙虾市场 | 客服电话：17333727821
       </div>
     </header>
     <div class="concent_title">
@@ -77,7 +77,7 @@ export default {
       query: this.$route.query,
       user: JSON.parse(window.sessionStorage.getItem("user")),
       urls: ["", ""],
-
+      token:window.sessionStorage.getItem('token'),
       dialogFormVisible: false,
       price: 0,
       maxPrice: 0,
@@ -106,7 +106,7 @@ export default {
           method: "post",
           url: "/auction/competeAuctionProduct",
           headers: {
-            token: Global.token,
+            token: this.token,
           },
           data: {
             price: this.price,
@@ -118,6 +118,7 @@ export default {
               message: "参与成功",
               type: "success",
             });
+            this.getAuctionLog();
           }
           this.dialogFormVisible = false;
         });
@@ -134,7 +135,7 @@ export default {
         method: "post",
         url: "/auction/getAuctionLog/" + this.query.id,
         headers: {
-          token: Global.token,
+          token: this.token,
         },
       }).then((res) => {
         this.logList = res.data.data;

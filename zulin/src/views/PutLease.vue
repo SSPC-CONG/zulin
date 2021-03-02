@@ -123,7 +123,7 @@ export default {
         status: "",
         userId: 0,
       },
-      token:Global.token,
+      token:window.sessionStorage.getItem('token'),
       imgUrl: "",
       imgUrl2: "",
       imgUrl3: "",
@@ -138,7 +138,7 @@ export default {
         method: "post",
         url: "/rentOutHome/addRenOutHome",
         headers: {
-          token: Global.token,
+          token: this.token,
         },
         data: this.form,
       }).then((response) => {
@@ -152,23 +152,23 @@ export default {
     handleAvatarSuccess(res, file) {
       //console.log(res);
       this.imgUrl = URL.createObjectURL(file.raw);
-      this.form.homeImg1 = URL.createObjectURL(file.raw);
+      this.form.homeImg1 = res.data;
       console.log(this.form.homeImg1);
     },
     handleAvatarSuccess2(res, file) {
       //console.log(res);
       this.imgUrl2 = URL.createObjectURL(file.raw);
-      this.form.homeImg2 = URL.createObjectURL(file.raw);
+      this.form.homeImg2 = res.data;
     },
     handleAvatarSuccess3(res, file) {
       //console.log(res);
       this.imgUrl3 = URL.createObjectURL(file.raw);
-      this.form.homeImg3 = URL.createObjectURL(file.raw);
+      this.form.homeImg3 = res.data;
     },
     handleAvatarSuccess4(res, file) {
       //console.log(res);
       this.imgUrl4 = URL.createObjectURL(file.raw);
-      this.form.homeImg4 = URL.createObjectURL(file.raw);
+      this.form.homeImg4 = res.data;
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";

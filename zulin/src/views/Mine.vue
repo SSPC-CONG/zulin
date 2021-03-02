@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div @click="becomeSeller" class="beSeller" v-if="!Global.user.vendor">
+    <div @click="becomeSeller" class="beSeller" v-if="!user.vendor">
       操作:
       <el-radio v-model="radio" label="1" disabled>成为买家</el-radio>
       <el-radio v-model="radio" label="2">成为卖家</el-radio>
@@ -49,21 +49,26 @@
       </div>
     </div>
     <!-- 我参与的拍卖 -->
-    <div class="myJoin">
+    <div class="myJoin" v-if="!user.vendor">
       我参与的拍卖：
-      <el-table :data="mineAuction" border style="width: 100%">
-        <el-table-column prop="product.productName" label="商品名" width="120">
+      <el-table :data="mineAuction" border style="">
+        <el-table-column prop="product.productName" label="商品名" >
         </el-table-column>
         <el-table-column
           prop="product.productDetails"
           label="商品信息"
-          width="120"
         >
         </el-table-column>
-        <el-table-column prop="price" label="我参与的竞价" width="120">
+        <el-table-column prop="price" label="我参与的竞价" >
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column  label="是否中标" >
           <template slot-scope="scope">
+            {{scope.row.flag?'是':'否'}}
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="操作" >
+          <template slot-scope="scope">
+            <el-button  @click="handlePay(scope.row)" type="text" size="small">支付</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -81,7 +86,9 @@ export default {
       order: [],
       selectId: [],
       Global: Global,
+      token:window.sessionStorage.getItem('token'),
       confirmInfo: "确认收货",
+      user:JSON.parse(window.sessionStorage.getItem('user')),
       mineAuction: [
         {
           flag: false,
@@ -92,20 +99,47 @@ export default {
           },
         },
       ],
+      
     };
   },
   created() {
-    this.radio = JSON.parse(window.sessionStorage.getItem("user")).vendor
+    this.radio = this.user.vendor
       ? "2"
       : "1";
     this.getAllOrderInfo();
-    this.confirmInfo = Global.user.vendor ? "确认发货" : "确认收货";
+    this.confirmInfo = this.user.vendor ? "确认发货" : "确认收货";
     console.log("order:", this.order);
-    if (Global.user.vendor) {
+    if (!this.user.vendor) {
       this.handleGetMineAuction();
     }
   },
   methods: {
+    //支付
+    handlePay:function(row){
+      if(row.flag){
+        this.$http({
+          method:'post',
+          url:'/pay',
+          headers:{
+            token:this.token,
+          },
+          data:{
+            auctionId:row.auctionId,
+            orderId:1
+          },
+        }).then((res)=>{
+          let body = document.getElementsByTagName('body')[0];
+          body.innerHTML = res.data;
+          let form = document.getElementsByTagName('form')[0];
+          form.style.height = 100+'vh'
+        })
+      }else{
+        this.$message({
+          message:'对不起你还没中标',
+          type:'error'
+        })
+      }
+    },
     //成为卖家
     becomeSeller: function () {
       console.log("成为卖家");
@@ -113,7 +147,7 @@ export default {
         method: "put",
         url: "/user/turnIntoVendor",
         headers: {
-          token: Global.token,
+          token: this.token,
         },
       }).then((response) => {
         if (response.data.code == 200) {
@@ -130,7 +164,7 @@ export default {
       this.$http
         .get("/order/getOrderListByUserId", {
           headers: {
-            token: Global.token,
+            token: this.token,
           },
         })
         .then((res) => {
@@ -158,16 +192,15 @@ export default {
     },
     //修改订单状态
     handleChangeOrderStatus() {
-      let url = Global.user.vendor
+      let url = this.user.vendor
         ? "/order/updateOrderStatusForSellers"
         : "/order/updateOrderStatusForBuys";
-      // console.log('user',Global.user.vendor)
       // console.log('url',url)
       this.$http({
         method: "post",
         url: url,
         headers: {
-          token: Global.token,
+          token: this.token,
         },
         data: {
           orderIds: this.selectId,
@@ -182,7 +215,7 @@ export default {
         method: "post",
         url: "/auction/getMyAuction",
         headers: {
-          token: Global.token,
+          token: this.token,
         },
       }).then((res) => {
         //console.log(res);

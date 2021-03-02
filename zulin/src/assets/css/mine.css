@@ -4,14 +4,23 @@
   /* text-align: center; */
   font-size: 16px;
   font-weight: bold;
-  color: #909399;
+  color: #409EFF;
+
 }
 .order{
   margin: 30px 0 0 0;
   font-size: 16px;
   font-weight: bold;
-  color: #909399;
+  color: #409EFF;
+
 }
 .el-table{
   margin-top: 20px;
+}
+.myJoin{
+  margin: 30px 0 0 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #409EFF;
+
 }

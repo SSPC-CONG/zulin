@@ -1,7 +1,7 @@
 
 header{
   height: 36px;
-  background: #F5F5F5;
+  background: rgba(245, 245, 245, 0.8);
   border-bottom: 1px solid #EEE;
   display: flex;
   flex-direction: row-reverse;
@@ -34,11 +34,11 @@ header{
   height: 98px;
   align-items: center;
   padding: 0 10% 0 10%;
-  background: #FFF; 
+  background: rgba(255,255,255,0.5); 
 }
 .menu{
   flex: 1;
-  text-align: center;
+  text-align: center; 
   height: 100%;
   line-height: 98px;
   font-size: 16px;
@@ -48,5 +48,6 @@ header{
   border-bottom: 4px #00c1b6 solid;
 }
 .concent{
-  margin: 0 10% 0 10%;
+  padding: 0 10% 0 10%;
+
 }
