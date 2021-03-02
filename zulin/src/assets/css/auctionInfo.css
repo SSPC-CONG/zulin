@@ -82,7 +82,7 @@ header{
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  color: #909399;
+  color: #409EFF;
 }
 .el-table{
   margin: 0 auto;
@@ -96,3 +96,6 @@ header{
 .el-table .success-row {
   background: #f0f9eb;
 } 
+.jinpai_btn{
+  margin-bottom: 30px;
+}

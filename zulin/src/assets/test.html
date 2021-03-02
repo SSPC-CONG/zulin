@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form name="punchout_form" method="post"
+        action="https://openapi.alipaydev.com/gateway.do?charset=utf-8&method=alipay.trade.page.pay&sign=Kd24EMtm8h9NvHcn7h4eiHPmp9vGegNpQr2U8es4zFMfUJU9yvO2Xkvu5nkmHOqN16Y1UhoNeOMuzs6imFExiPDAu3ykmBanxV%2Bjf17q8UzF9MHfkWbDDE14IkCmtQqvtXsx0i%2FJbwcU9AKH0nDitLmWepJ0t0q4sDYnYZ1Nw6dYXeMS4SiyrjusGqQCMlqW4gcYIMzI%2FkIyN0azhQdWuctQl%2F93brV5lL2dQNZJaicrvUGvUKl%2FBxYmYcIguEXYeL9W%2Fd2cbwl9VCtVJTK0KnBFgDPc4jULxtCAc%2BYeTofOg9LB2BE30LbF5UJHpTrUHf%2B0xk2g4jp%2BWoQ0xyY%2Bcw%3D%3D&return_url=http%3A%2F%2Flocalhost%3A9696%2Fsuccess%2F6&notify_url=http%3A%2F%2Flocalhost%3A9696%2Fsuccess%2F6&version=1.0&app_id=2021000117616008&sign_type=RSA2&timestamp=2021-03-02+22%3A38%3A33&alipay_sdk=alipay-sdk-java-dynamicVersionNo&format=json">
+        <input type="hidden" name="biz_content"
+            value="{    &quot;out_trade_no&quot;:&quot;1&quot;,    &quot;product_code&quot;:&quot;FAST_INSTANT_TRADE_PAY&quot;,    &quot;total_amount&quot;:2113.0,    &quot;subject&quot;:&quot;结账!!!&quot;,    &quot;body&quot;:&quot;&quot;    }  }">
+        <input type="submit" value="立即支付" style="display:none">
+    </form>
+    <script>document.forms[0].submit();</script>
+</body>
+
+</html>

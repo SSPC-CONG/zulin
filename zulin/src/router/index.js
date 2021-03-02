@@ -10,6 +10,7 @@ import Put from '../views/Put.vue'
 import PutLease from '../views/PutLease.vue'
 import AuctionInfo from '../views/AuctionInfo.vue'
 import Manager from '../views/Manager.vue'
+import Pay from '../views/pay.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,10 @@ const routes = [
   {
     path:'/auctionInfo',
     component:AuctionInfo
+  },
+  {
+    path:'/pay',
+    component:Pay
   }
   // {
   //   path: '/about',

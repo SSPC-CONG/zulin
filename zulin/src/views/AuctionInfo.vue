@@ -38,8 +38,8 @@
     </div>
     <!-- 参加竞拍-->
     <div class="postPrice">
-      <el-button type="" @click="dialogFormVisible = true" v-if="!user.vendor">参加竞拍</el-button>
-      <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
+      <el-button type="primary" @click="dialogFormVisible = true" v-if="!user.vendor" class="jinpai_btn">参加竞拍</el-button>
+      <el-dialog title="参加竞拍" :visible.sync="dialogFormVisible" >
         <el-form>
           <el-form-item label="竞价" :label-width="formLabelWidth">
             <el-input
@@ -58,15 +58,7 @@
       </el-dialog>
     </div>
 
-    <ul class="infinite-list" style="overflow: auto">
-      <li
-        v-for="(item, index) in logList"
-        class="infinite-list-item"
-        :key="item.nickName + index"
-      >
-        {{ index }}
-      </li>
-    </ul>
+    
   </div>
 </template>
 <script>
