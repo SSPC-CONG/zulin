@@ -67,7 +67,7 @@
         <el-table-column prop="price" label="我参与的竞价"> </el-table-column>
         <el-table-column label="是否中标">
           <template slot-scope="scope">
-            {{ scope.row.flag ? "是" : "否" }}
+            {{ scope.row.flag==1 ? "是" : "否" }}
           </template>
         </el-table-column>
         <el-table-column label="是否支付">
@@ -158,7 +158,7 @@ export default {
       user: JSON.parse(window.sessionStorage.getItem("user")),
       mineAuction: [
         {
-          flag: false,
+          flag: 0,
           price: 0,
           product: {
             productDetails: "",
@@ -268,7 +268,7 @@ export default {
     },
     //支付
     handlePay: function (row, orderId) {
-      if (row.flag) {
+      if (row.flag == 1) {
         this.$http({
           method: "post",
           url: "/pay",

@@ -6,17 +6,19 @@ header{
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  padding:  0 10% 0 0;
   justify-content: right;
 }
 .welcome{
-  width: 16%;
+  width: 6%;
   text-align: right;
   font-size: 12px;
+  margin: 0 2% 0 2%;
   color: #F22E00!important;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  padding:  0 10% 0 0;
+  display: flex;
 }
 .head_photo img,.head_photo{
   height: 30px;
