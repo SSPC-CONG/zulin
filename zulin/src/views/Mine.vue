@@ -147,7 +147,7 @@ import Global from "./../assets/js/Global";
 export default {
   data() {
     return {
-      row:{},
+      row: {},
       radio: "1",
       order: [],
       selectId: [],
@@ -189,31 +189,30 @@ export default {
     this.handleSelectReceiptList();
   },
   methods: {
-    pingjia(row){
+    pingjia(row) {
       //console.log(row)
-      this.pinglun = true
+      this.pinglun = true;
       this.row = row;
     },
     //生成评价
-    handlePingjia(){
-      
+    handlePingjia() {
       this.$http({
-        method:'post',
-        url:'/estimate/addEstimate',
-        headers:{
-          token:this.token,
+        method: "post",
+        url: "/estimate/addEstimate",
+        headers: {
+          token: this.token,
         },
-        data:{
-          context:this.pinglunInfo,
-          orderId:this.row.orderId
-        }
-      }).then((res)=>{
+        data: {
+          context: this.pinglunInfo,
+          orderId: this.row.orderId,
+        },
+      }).then((res) => {
         this.$message({
-          message:'评论成功',
-          type:'success'
-        })
-        this.pinglun = false
-      })
+          message: "评论成功",
+          type: "success",
+        });
+        this.pinglun = false;
+      });
     },
     //生成订单
     becomeOrder: function (row) {
@@ -279,6 +278,7 @@ export default {
           data: {
             auctionId: row.auctionId,
             orderId: orderId,
+            url:window.location.href,
           },
         }).then((res) => {
           const div = document.createElement("div"); // 创建div
